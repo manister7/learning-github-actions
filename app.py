@@ -2,7 +2,7 @@ import requests
 import json
 response = requests.get("http://api.open-notify.org/astros.json")
 
-#output = response.json()
+#=output = response.json()
 
 pretty_json = json.dumps(output, indent=5)
 
