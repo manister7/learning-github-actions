@@ -1,17 +1,23 @@
-name: Hello World
-on: 
-  push:
-    branches: [ develop ]
+name: Python CI
+on:
   pull_request:
     branches: [ main ]
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
-        container:
-            image: alpine:latest
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v3
-            - name: list files in alpine container
-              run: ls -l
+  run-app:
+    runs-on: ubuntu-latest
+    container:
+      image: alpine:latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run the application
+        run: |
+          python app.py  
