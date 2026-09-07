@@ -1,0 +1,17 @@
+name: Hello World
+on: 
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        container:
+            image: alpine:latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+            - name: list files in alpine container
+              run: ls -l
